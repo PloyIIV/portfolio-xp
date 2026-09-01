@@ -199,7 +199,8 @@ const projects = [
     text: "A festive card-matching game built with the MERN stack.",
     tags: ["React", "Node.js", "MongoDB"],
     githubUrl: "https://github.com/PloyIIV/Merry-Mathch-Final-Project",
-    liveUrl: "",
+    liveUrl: "https://merry-project-frontend.vercel.app",
+    demoSize: { width: 1920, height: 1080 },
   },
   {
     number: "02",
@@ -224,6 +225,7 @@ const projects = [
     tags: ["JavaScript", "HTML", "CSS"],
     githubUrl: "",
     liveUrl: "https://maplestoryclicker.vercel.app/",
+    demoSize: { width: 1920, height: 1080 },
   },
   {
     number: "05",
@@ -243,8 +245,12 @@ function Project({ project, onDemo }) {
       window.open(project.githubUrl, "_blank", "noopener,noreferrer");
     }
   };
+  const openGitHub = (event) => {
+    event.stopPropagation();
+    window.open(project.githubUrl, "_blank", "noopener,noreferrer");
+  };
   return (
-    <button className="project-card" onClick={openProject}>
+    <div className="project-card" onClick={openProject}>
       <span>{project.number}</span>
       <h3>{project.title}</h3>
       <p>{project.text}</p>
@@ -253,11 +259,19 @@ function Project({ project, onDemo }) {
           <b key={tag}>{tag}</b>
         ))}
       </div>
-      <small>
-        {project.liveUrl ? "Open live demo" : "View on GitHub"}{" "}
-        <ChevronRight size={13} />
-      </small>
-    </button>
+      <div className="project-actions">
+        {project.liveUrl && (
+          <button className="project-btn" onClick={openProject}>
+            Live Demo <ChevronRight size={13} />
+          </button>
+        )}
+        {project.githubUrl && (
+          <button className="project-btn" onClick={openGitHub}>
+            GitHub <ChevronRight size={13} />
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 function ProjectContent({ onDemo }) {
@@ -379,10 +393,22 @@ function DemoWindow({ project, position, zIndex, onClose, onFocus }) {
       ),
     });
   };
+  const demoSize = project.demoSize || {};
+  const windowStyle = {
+    left: position.x,
+    top: position.y,
+    zIndex,
+    ...(demoSize.width
+      ? { width: `min(${demoSize.width}px, calc(100vw - 20px))` }
+      : {}),
+    ...(demoSize.height
+      ? { height: `min(${demoSize.height}px, calc(100vh - 100px))` }
+      : {}),
+  };
   return (
     <section
       className="window demo-window"
-      style={{ left: position.x, top: position.y, zIndex }}
+      style={windowStyle}
       onPointerDown={() => onFocus()}
     >
       <header
@@ -407,9 +433,24 @@ function DemoWindow({ project, position, zIndex, onClose, onFocus }) {
           </button>
         </div>
       </header>
-      <main className="demo-body">
+      <main
+        className="demo-body"
+        style={
+          demoSize.height
+            ? { height: `calc(min(${demoSize.height}px, calc(100vh - 100px)) - 60px)` }
+            : {}
+        }
+      >
         {project.liveUrl ? (
-          <iframe title={`${project.title} live demo`} src={project.liveUrl} />
+          <iframe
+            title={`${project.title} live demo`}
+            src={project.liveUrl}
+            style={
+              demoSize.height
+                ? { height: "100%", minHeight: "365px" }
+                : {}
+            }
+          />
         ) : (
           <DemoPlaceholder project={project} />
         )}
@@ -482,11 +523,17 @@ function App() {
     });
   const openDemo = (project) => {
     const id = `demo-${project.number}`;
+    const isFullscreen = project.demoSize?.width === 1920;
     setWindows((current) => ({
       ...current,
       [id]: current[id]
         ? { ...current[id], z: topZ + 1 }
-        : { x: 260, y: 155, z: topZ + 1, project },
+        : {
+            x: isFullscreen ? 0 : 260,
+            y: isFullscreen ? 0 : 155,
+            z: topZ + 1,
+            project,
+          },
     }));
     setTopZ((z) => z + 1);
   };

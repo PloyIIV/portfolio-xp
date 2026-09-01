@@ -53,6 +53,33 @@
 .project-card small svg {
   margin-left: 2px;
 }
+.project-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: 1px solid #3c91d5;
+  border-radius: 6px;
+  background: #e8f4fd;
+  color: #1a5f9e;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.project-btn:hover {
+  background: #3c91d5;
+  color: #fff;
+}
+.project-btn svg {
+  margin-left: 2px;
+}
 .demo-window {
   width: min(760px, calc(100vw - 100px));
   min-height: 430px;
