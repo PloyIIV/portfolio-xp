@@ -47,8 +47,7 @@ const sections = {
               experiences.
             </p>
             <p className="muted">
-              This is your space for a short introduction—your background, what
-              you enjoy building, and what you’re currently learning.
+              👩🏻‍💻 I enjoy solving problems through code and creating web experiences that are simple, intuitive, and engaging. I’m always curious to learn new technologies and improve the way I build things.
             </p>
           </div>
         </div>
@@ -73,14 +72,19 @@ const sections = {
         <p className="lead">My professional journey.</p>
         <div className="timeline">
           <article>
-            <span className="time">2024 — Present</span>
+            <span className="time">2026 — Present</span>
             <h3>
               Junior Software Developer <em>· Generation Thailand</em>
             </h3>
             <p>
-              Add a concise summary of your role, the team, and impact you made.
+              <ul>
+                <li>Developed responsive web applications using React, JavaScript, Node.js, Express.js, MongoDB, and SQL.</li>
+                <li>Built individual and team-based projects with hands-on experience in front-end and back-end development.</li>
+                <li>Practiced REST API integration, database management, authentication, and collaborative development.</li>
+              </ul>
             </p>
           </article>
+          
           <article>
             <span className="time">2021 - 2023</span>
             <h3>
@@ -128,11 +132,11 @@ const sections = {
         <div className="skill-columns">
           <SkillGroup
             title="Frontend"
-            items={["React", "JavaScript", "HTML & CSS", "Tailwind CSS"]}
+            items={["React", "JavaScript", "HTML & CSS", "Tailwind CSS", "Shadcn", "DaisyUI"]}
           />
           <SkillGroup
             title="Backend"
-            items={["Node.js", "Express.js", "REST APIs", "Authentication"]}
+            items={["Node.js", "Express.js", "REST APIs", "JWT" , "Authentication", "Authorization"]}
           />
           <SkillGroup
             title="Database & Tools"
@@ -144,6 +148,7 @@ const sections = {
               "Git & GitHub",
               "Postman",
               "Figma",
+              "Trello"
             ]}
           />
         </div>
@@ -186,7 +191,7 @@ const sections = {
             <FileText size={16} /> Download résumé <ChevronRight size={15} />
           </a>
         </div>
-        <p className="muted bottom-note">Replace these links with yours.</p>
+        {/* <p className="muted bottom-note">Replace these links with yours.</p> */}
       </>
     ),
   },
@@ -197,7 +202,7 @@ const projects = [
     number: "01",
     title: "Merry Match",
     text: "A festive card-matching game built with the MERN stack.",
-    tags: ["React", "Node.js", "MongoDB"],
+    tags: ["MERN", "SQL", "Supabase", "Stripe"],
     githubUrl: "https://github.com/PloyIIV/Merry-Mathch-Final-Project",
     liveUrl: "https://merry-project-frontend.vercel.app",
     demoSize: { width: 1920, height: 1080 },
@@ -220,7 +225,7 @@ const projects = [
   },
   {
     number: "04",
-    title: "Cookie Clicker",
+    title: "MapleStory Clicker",
     text: "A MapleStory-themed cookie clicker game with a nostalgic twist.",
     tags: ["JavaScript", "HTML", "CSS"],
     githubUrl: "",
